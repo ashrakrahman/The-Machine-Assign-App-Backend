@@ -14,6 +14,12 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
+// for production
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Our app is running on port ${PORT}`);
+});
+
 // Request middleware
 app.use(morgan("dev")); // To get every request Information in terminal
 app.use(bodyParser.urlencoded({ extended: false }));
