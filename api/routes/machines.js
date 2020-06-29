@@ -1,15 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Product = require("../models/product");
+const Machine = require("../models/machine");
 const auth = require("../middleware");
 const utils = require("../utils");
 
 const router = express.Router();
 
-// To get all products
+// To get all machines
 router.get("/", auth, (req, res, next) => {
   const user_id = req.decodedData.data.data;
-  Product.find({ created_by: user_id })
+  Machine.find({ created_by: user_id })
     .exec()
     .then(result => {
       if (result.length > 0) {
@@ -23,10 +23,10 @@ router.get("/", auth, (req, res, next) => {
     });
 });
 
-// To get an individual product
-router.get("/:productId", auth, (req, res, next) => {
-  const productId = req.params.productId;
-  Product.findById(productId)
+// To get an individual machine
+router.get("/:machineId", auth, (req, res, next) => {
+  const machineId = req.params.machineId;
+  Machine.findById(machineId)
     .exec()
     .then(result => {
       return utils.genericResponse(res, 200, "Success!", result);
@@ -36,25 +36,29 @@ router.get("/:productId", auth, (req, res, next) => {
     });
 });
 
-// To save a new product entry
-router.post("/", auth, (req, res, next) => {
+// To save a new machine entry
+router.post("/", auth, async (req, res, next) => {
   const user_id = req.decodedData.data.data;
-  const product = new Product({
+  const checkMachine = await Machine.findOne({ code: req.body.code });
+  if (checkMachine) {
+    return utils.genericResponse(res, 400, "That code already exisits!", null);
+  }
+  const machine = new Machine({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     type: req.body.type,
-    price: req.body.price,
+    code: req.body.code,
     created_by: user_id
   });
 
-  product
+  machine
     .save()
     .then(result => {
       console.log(result);
       return utils.genericResponse(
         res,
         201,
-        "Product created successfully!",
+        "Machine created successfully!",
         result
       );
     })
@@ -63,17 +67,17 @@ router.post("/", auth, (req, res, next) => {
     });
 });
 
-// To update an existing product info
-router.patch("/:productId", auth, (req, res, next) => {
-  const productId = req.params.productId;
+// To update an existing machine info
+router.patch("/:machineId", auth, (req, res, next) => {
+  const machineId = req.params.machineId;
   const user_id = req.decodedData.data.data;
-  Product.update(
-    { _id: productId },
+  Machine.update(
+    { _id: machineId },
     {
       $set: {
         name: req.body.name,
         type: req.body.type,
-        price: req.body.price,
+        code: req.body.code,
         created_by: user_id
       }
     }
@@ -83,7 +87,7 @@ router.patch("/:productId", auth, (req, res, next) => {
       return utils.genericResponse(
         res,
         202,
-        "Product updated successfully!",
+        "Machine updated successfully!",
         result
       );
     })
@@ -91,6 +95,17 @@ router.patch("/:productId", auth, (req, res, next) => {
       console.log(err);
       return utils.genericResponse(res, 500, "An Error Occured!", err);
     });
+});
+
+// To delete an individual machine
+router.delete("/:machineId", auth, async (req, res, next) => {
+  const machineId = req.params.machineId;
+  try {
+    const result = await Machine.deleteOne({ _id: machineId });
+    return utils.genericResponse(res, 200, "Success!", result);
+  } catch (err) {
+    return utils.genericResponse(res, 500, "An Error Occured!", err);
+  }
 });
 
 module.exports = router;

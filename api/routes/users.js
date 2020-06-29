@@ -10,7 +10,7 @@ const router = express.Router();
 
 // To register a user
 router.post("/registration", async (req, res, next) => {
-  const { email, password, username } = req.body;
+  const { email, password, username, type } = req.body;
 
   if (!utils.isValidEmail(email)) {
     return utils.genericResponse(res, 400, "Email is not Valid!.", null);
@@ -30,7 +30,8 @@ router.post("/registration", async (req, res, next) => {
       _id: new mongoose.Types.ObjectId(),
       username: username,
       email: email,
-      password: hashedPassword
+      password: hashedPassword,
+      user_type: type
     });
 
     user
@@ -98,6 +99,7 @@ router.post("/login", async (req, res, next) => {
     );
     const data = {
       user_id: user.id,
+      user_type: user.user_type,
       access_token: access_token,
       expires_in: process.env.JWT_ACCESS_TOKEN_LIFE_SPAN,
       refresh_token: refresh_token
@@ -158,6 +160,30 @@ router.post("/refresh", auth, async (req, res, next) => {
   };
 
   return utils.genericResponse(res, 200, "Success", data);
+});
+
+// To get all operator info
+router.get("/operator", auth, async (req, res, next) => {
+  await User.find({ user_type: "operator" })
+    .exec()
+    .then(result => {
+      console.log(result);
+      const data = [];
+      let i = 1;
+      result.forEach(function(item) {
+        info = {
+          count: i++,
+          id: item.id,
+          name: item.username
+        };
+        data.push(info);
+      });
+
+      return utils.genericResponse(res, 200, "Success", data);
+    })
+    .catch(err => {
+      return utils.genericResponse(res, 500, "An Error Occured!", err);
+    });
 });
 
 module.exports = router;

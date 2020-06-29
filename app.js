@@ -3,9 +3,10 @@ const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const productRoutes = require("./api/routes/products");
+const machineRoutes = require("./api/routes/machines");
 const userRoutes = require("./api/routes/users");
 const infoRoutes = require("./api/routes/info");
+const assignInfoRoutes = require("./api/routes/assignInfo");
 require("dotenv").config();
 
 // Connect to Mongo Atlas db
@@ -15,6 +16,7 @@ mongoose.connect(
 );
 
 // for production
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Our app is running on port ${PORT}`);
@@ -42,7 +44,8 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use("/products", productRoutes);
+app.use("/machines", machineRoutes);
+app.use("/assign", assignInfoRoutes);
 app.use("/users", userRoutes);
 app.use("/api/v1/", infoRoutes);
 
