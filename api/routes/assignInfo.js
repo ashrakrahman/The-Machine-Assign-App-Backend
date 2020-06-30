@@ -12,14 +12,19 @@ router.post("/", auth, async (req, res, next) => {
   const shift = req.body.shift;
   const assigned_date = req.body.assigned_date;
 
-  let checkValidity = await AssignInfo.find({
-    operator_id: operator_id,
+  let checkMachineValidity = await AssignInfo.find({
     machine_id: machine_id,
     shift: shift,
     assigned_date: assigned_date
   });
 
-  if (checkValidity.length === 0) {
+  let checkOperatorValidity = await AssignInfo.find({
+    operator_id: operator_id,
+    shift: shift,
+    assigned_date: assigned_date
+  });
+
+  if (checkMachineValidity.length === 0 && checkOperatorValidity.length === 0) {
     const assignInfo = new AssignInfo({
       _id: new mongoose.Types.ObjectId(),
       operator_id: operator_id,
