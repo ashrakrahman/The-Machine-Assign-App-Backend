@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "cfe1425d-46b4-4024-b270-6c9ea85f2236",
+		"name": "node-rest-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all mahines",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"laptop\",\n    \"type\":\"HP\",\n    \"price\": 12345\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new machine",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"laptop\",\n    \"type\":\"HP\",\n    \"type\": \"hammer\",\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/machines",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"machines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single machine",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"laptop\",\n    \"type\":\"HP\",\n    \"price\": 12345\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/products/5ef0b2d3d74fab2cc9351f6a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"products",
+						"5ef0b2d3d74fab2cc9351f6a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update machine",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"laptop\",\n    \"type\":\"HP\",\n    \"price\": 98543\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/products/5ef0b2d3d74fab2cc9351f6a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"products",
+						"5ef0b2d3d74fab2cc9351f6a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user info",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true,
+					"user-agent": true,
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWVmMjIwNjMwOWVhNGQyZGVhMTEzNDcwIiwiaWF0IjoxNTkzMDIxMDYyLCJleHAiOjE1OTMwMjQ2NjJ9.mbANeJkE6H8dey0TKY5aLxxs84steVZwKOj7QGrZjak",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/users/info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"users",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"ashrakrahman\",\n    \"password\":\"parapara\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"ashrakrahman@outlook.com\",\n    \"password\":\"parapara\",\n    \"username\": \"ashrakrahman\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/users/registration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"users",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Access token by Refresh token",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true,
+					"user-agent": true,
+					"host": true,
+					"content-length": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiYXNocmFrcmFobWFuIiwiaWF0IjoxNTkzMDIxMDYyLCJleHAiOjE1OTMxMDc0NjJ9.ZHO8rzpO-vYP-yfV6D4siwd1yEhA3mjGRbZ11-dkr4w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/users/refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"users",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Assign List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWVmNzY1YTMyODc2NjMyYjEzYzFiOTM2IiwiaWF0IjoxNTkzMzUxMTg4LCJleHAiOjE1OTMzNTQ3ODh9.-jgYaVrvhN1TGAr8oeVP0mOuAxR0k6HbgLcwtUcnYGI",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://polar-beyond-50847.herokuapp.com/assign/all",
+					"protocol": "https",
+					"host": [
+						"polar-beyond-50847",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"assign",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add assign info",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWVmNzY1YTMyODc2NjMyYjEzYzFiOTM2IiwiaWF0IjoxNTkzMzM1NjUyLCJleHAiOjE1OTMzMzkyNTJ9.bmdO0CD0Pu2PURPzo__CGvo9tUK0z4MfA9LiMuIxikc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"operator_id\": \"5ef76edf4c868d320e3a2f53\",\n    \"operator_name\": \"operator\",\n    \"machine_id\": \"5ef77d86ca6e703dab2ae52b\",\n    \"machine_code\": \"12345\",\n    \"shift\": \"shift_b\",\n    \"assigned_date\": \"2020-02-03\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/assign",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"assign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a machine",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWVmNzY1YTMyODc2NjMyYjEzYzFiOTM2IiwiaWF0IjoxNTkzNDEyMzI4LCJleHAiOjE1OTM0MTU5Mjh9.qNxohiaQDJBGC7gZzTn8DIUKSp02MfVCNlNGVKYD0wA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/machines/5ef8e60f15d74b4391a0d542",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"machines",
+						"5ef8e60f15d74b4391a0d542"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All assigned operator List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWVmNzZlZGY0Yzg2OGQzMjBlM2EyZjUzIiwiaWF0IjoxNTkzMzYxNzM2LCJleHAiOjE1OTMzNjUzMzZ9.okamm5W1IswWI358-0oeSBjXFY5U3ukAShw-v1CjVtM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start_date\": \"2020-01-01\",\n    \"end_date\": \"2020-12-12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/assign/operator-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"assign",
+						"operator-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get App info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWVmNzY1YTMyODc2NjMyYjEzYzFiOTM2IiwiaWF0IjoxNTkzMzUxMTg4LCJleHAiOjE1OTMzNTQ3ODh9.-jgYaVrvhN1TGAr8oeVP0mOuAxR0k6HbgLcwtUcnYGI",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://polar-beyond-50847.herokuapp.com/api/v1",
+					"protocol": "https",
+					"host": [
+						"polar-beyond-50847",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
